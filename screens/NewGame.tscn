@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cekmje4esu23e"]
+
+[ext_resource type="Script" uid="uid://bhyaa76ixfhyl" path="res://screens/new_game.gd" id="1_agvt0"]
+
+[node name="Control" type="Control" unique_id=2060819407]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_agvt0")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1445115382]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 37.0
+offset_right = 279.0
+offset_bottom = 547.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1321511530]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=472002395]
+layout_mode = 2
+text = "Bela Brojač"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1691559298]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=9187796]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=508261672]
+layout_mode = 2
+text = "Cilj"
+
+[node name="TargetOption" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=595599991]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "701"
+popup/item_0/id = 0
+popup/item_1/text = "1001"
+popup/item_1/id = 1
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1269213767]
+layout_mode = 2
+text = "Kreni"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
