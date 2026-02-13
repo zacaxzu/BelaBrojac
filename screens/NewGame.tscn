@@ -13,10 +13,10 @@ script = ExtResource("1_agvt0")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1445115382]
 layout_mode = 0
-offset_left = 31.0
-offset_top = 37.0
-offset_right = 279.0
-offset_bottom = 547.0
+offset_left = 54.0
+offset_top = 48.0
+offset_right = 302.0
+offset_bottom = 558.0
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
