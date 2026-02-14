@@ -68,7 +68,6 @@ func recompute_totals_from_history() -> void:
 		entry["total_a"] = score_a
 		entry["total_b"] = score_b
 
-
 func update_points(index: int, new_points: int) -> void:
 	if index < 0 or index >= history.size():
 		return

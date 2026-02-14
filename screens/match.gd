@@ -3,6 +3,7 @@ extends Control
 var selected_team := -1
 var editing_index := -1
 var editing_team := -1
+var _sanitizing := false
 
 @onready var points_input: LineEdit = %PointsInput
 @onready var info_label: Label = %InfoLabel
@@ -22,6 +23,42 @@ func _ready() -> void:
 	render_history()
 	edit_dialog.confirmed.connect(_on_edit_confirmed)
 	sync_finish_ui()
+	
+	_setup_numeric_only(points_input, GameState.BASE_POINTS)
+	_setup_numeric_only(edit_mi, GameState.BASE_POINTS)
+	_setup_numeric_only(edit_vi, GameState.BASE_POINTS)
+
+func _setup_numeric_only(le: LineEdit, max_value: int) -> void:
+	# Na Androidu/ iOS-u pokušaj otvoriti numeričku tipkovnicu
+	le.virtual_keyboard_type = LineEdit.KEYBOARD_TYPE_NUMBER
+
+	# Filtriraj svaki put kad se tekst promijeni
+	le.text_changed.connect(_on_number_text_changed.bind(le, max_value))
+
+
+func _on_number_text_changed(new_text: String, le: LineEdit, max_value: int) -> void:
+	if _sanitizing:
+		return
+	_sanitizing = true
+
+	# 1) ostavi samo znamenke
+	var filtered := ""
+	for ch in new_text:
+		if ch >= "0" and ch <= "9":
+			filtered += ch
+
+	if filtered != new_text:
+		le.text = filtered
+		le.caret_column = le.text.length()
+
+	# 2) opcionalno: ograniči raspon (npr. 0..162)
+	if le.text != "":
+		var v := int(le.text)
+		if v > max_value:
+			le.text = str(max_value)
+			le.caret_column = le.text.length()
+
+	_sanitizing = false
 
 func update_score_ui() -> void:
 	score_label.text = "%s: %d   |   %s: %d" % [
