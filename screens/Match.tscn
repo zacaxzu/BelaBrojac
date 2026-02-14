@@ -46,7 +46,6 @@ layout_mode = 2
 [node name="PointsInput" type="LineEdit" parent="MarginContainer/VBoxContainer/AddRow" unique_id=449671820]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Bodovi"
 alignment = 1
 
 [node name="AddButton" type="Button" parent="MarginContainer/VBoxContainer/AddRow" unique_id=1996333245]
@@ -57,6 +56,21 @@ text = "Dodaj"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Prag: "
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2072531699]
+layout_mode = 2
+text = "Povijest"
+
+[node name="HistoryScroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer" unique_id=1303482543]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HistoryList" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HistoryScroll" unique_id=1324552671]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TeamRow/MiButton" to="." method="_on_mi_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TeamRow/ViButton" to="." method="_on_vi_button_pressed"]
