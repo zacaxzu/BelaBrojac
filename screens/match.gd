@@ -73,17 +73,20 @@ func _on_add_button_pressed() -> void:
 		return
 
 	var pts: int = int(raw)
-	if pts <= 0:
-		info_label.text = "Bodovi moraju biti > 0."
+	if pts < 0 or pts > GameState.BASE_POINTS:
+		info_label.text = "Bodovi moraju biti između 0 i %d." % GameState.BASE_POINTS
 		return
 
-	GameState.add_points(selected_team, pts)
+	var entry := GameState.add_points(selected_team, pts)
 
 	points_input.text = ""
 	update_score_ui()
-
-	# najjednostavnije i sigurno: ponovo iscrtaj povijest (indeksi budu točni)
 	render_history()
+
+	info_label.text = "Dodano: Mi +%d | Vi +%d" % [
+		int(entry.get("delta_a", 0)),
+		int(entry.get("delta_b", 0))
+	]
 
 	await get_tree().process_frame
 	history_scroll.scroll_vertical = int(history_scroll.get_v_scroll_bar().max_value)
@@ -96,15 +99,14 @@ func _on_edit_row_pressed(index: int) -> void:
 
 	edit_error.text = ""
 
-	# pokaži bodove samo na strani koja je dodavana; drugu zaključaj
 	if editing_team == 0:
 		edit_mi.text = str(pts)
-		edit_vi.text = "0"
+		edit_vi.text = str(GameState.BASE_POINTS - pts)
 		edit_mi.editable = true
 		edit_vi.editable = false
 	else:
-		edit_mi.text = "0"
 		edit_vi.text = str(pts)
+		edit_mi.text = str(GameState.BASE_POINTS - pts)
 		edit_mi.editable = false
 		edit_vi.editable = true
 
@@ -121,8 +123,8 @@ func _on_edit_confirmed() -> void:
 		return
 
 	var pts := int(raw)
-	if pts < 0:
-		edit_error.text = "Ne može negativno."
+	if pts < 0 or pts > GameState.BASE_POINTS:
+		edit_error.text = "Mora biti 0–%d." % GameState.BASE_POINTS
 		edit_dialog.popup_centered()
 		return
 
