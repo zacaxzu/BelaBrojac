@@ -21,6 +21,7 @@ func _ready() -> void:
 	info_label.text = "Odaberi Mi/Vi, upiši broj i dodaj."
 	render_history()
 	edit_dialog.confirmed.connect(_on_edit_confirmed)
+	sync_finish_ui()
 
 func update_score_ui() -> void:
 	score_label.text = "%s: %d   |   %s: %d" % [
@@ -63,6 +64,10 @@ func _on_vi_button_pressed() -> void:
 	info_label.text = "Odabrano: Vi"
 
 func _on_add_button_pressed() -> void:
+	if GameState.is_finished():
+		sync_finish_ui()
+		return
+
 	if selected_team == -1:
 		info_label.text = "Prvo odaberi Mi ili Vi."
 		return
@@ -82,11 +87,15 @@ func _on_add_button_pressed() -> void:
 	points_input.text = ""
 	update_score_ui()
 	render_history()
+	sync_finish_ui()
 
-	info_label.text = "Dodano: Mi +%d | Vi +%d" % [
-		int(entry.get("delta_a", 0)),
-		int(entry.get("delta_b", 0))
-	]
+	# Ako je igra završila, sync_finish_ui će već postaviti "KRAJ..." poruku,
+	# pa nemoj to pregaziti.
+	if not GameState.is_finished():
+		info_label.text = "Dodano: Mi +%d | Vi +%d" % [
+			int(entry.get("delta_a", 0)),
+			int(entry.get("delta_b", 0))
+		]
 
 	await get_tree().process_frame
 	history_scroll.scroll_vertical = int(history_scroll.get_v_scroll_bar().max_value)
@@ -134,3 +143,40 @@ func _on_edit_confirmed() -> void:
 
 	update_score_ui()
 	render_history()
+	sync_finish_ui()
+	'apply_finished_state_if_needed()'
+
+'func apply_finished_state_if_needed() -> void:
+	if not GameState.is_finished():
+		return
+
+	var winner := GameState.team_a if GameState.score_a >= GameState.target else GameState.team_b
+	info_label.text = "KRAJ! Pobijedio je %s (%d:%d)" % [winner, GameState.score_a, GameState.score_b]
+
+	# Zaključaj unos
+	%AddButton.disabled = true
+	%PointsInput.editable = false
+	%MiButton.disabled = true
+	%ViButton.disabled = true'
+
+func sync_finish_ui() -> void:
+	var finished := GameState.is_finished()
+
+	%AddButton.disabled = finished
+	%PointsInput.editable = not finished
+	%MiButton.disabled = finished
+	%ViButton.disabled = finished
+
+	if finished:
+		var winner := GameState.team_a if GameState.score_a >= GameState.target else GameState.team_b
+		info_label.text = "KRAJ! Pobijedio je %s (%d:%d). Možeš urediti retke da ispraviš grešku." % [
+			winner, GameState.score_a, GameState.score_b
+		]
+	else:
+		# vrati normalnu poruku (po želji)
+		if selected_team == 0:
+			info_label.text = "Odabrano: Mi"
+		elif selected_team == 1:
+			info_label.text = "Odabrano: Vi"
+		else:
+			info_label.text = "Odaberi Mi/Vi, upiši broj i dodaj."

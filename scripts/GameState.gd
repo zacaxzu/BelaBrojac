@@ -19,6 +19,9 @@ func new_match(target_score: int) -> void:
 	score_b = 0
 	history.clear()
 
+func is_finished() -> bool:
+	return score_a >= target or score_b >= target
+
 func add_points(team: int, points: int) -> Dictionary:
 	# points = bodovi za odabrani tim iz baze 162
 	points = clamp(points, 0, BASE_POINTS)

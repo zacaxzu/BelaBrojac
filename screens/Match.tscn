@@ -33,10 +33,12 @@ text = "Tim Mi : Tim Vi"
 layout_mode = 2
 
 [node name="MiButton" type="Button" parent="MarginContainer/VBoxContainer/TeamRow" unique_id=1041666177]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Mi"
 
 [node name="ViButton" type="Button" parent="MarginContainer/VBoxContainer/TeamRow" unique_id=1128919307]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Vi"
 
@@ -49,6 +51,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="AddButton" type="Button" parent="MarginContainer/VBoxContainer/AddRow" unique_id=1996333245]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Dodaj"
 
