@@ -72,6 +72,41 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="EditDialog" type="ConfirmationDialog" parent="." unique_id=629337668]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditDialog" unique_id=274745344]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditDialog/VBoxContainer" unique_id=773628207]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer" unique_id=2124228565]
+layout_mode = 2
+text = "Mi"
+
+[node name="EditMiInput" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer" unique_id=99671689]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mi bodovi"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EditDialog/VBoxContainer" unique_id=2018298692]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EditDialog/VBoxContainer/HBoxContainer2" unique_id=2136592508]
+layout_mode = 2
+text = "Vi"
+
+[node name="EditViInput" type="LineEdit" parent="EditDialog/VBoxContainer/HBoxContainer2" unique_id=680349205]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Vi"
+
+[node name="EditErrorLabel" type="Label" parent="EditDialog/VBoxContainer" unique_id=1394790817]
+unique_name_in_owner = true
+layout_mode = 2
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TeamRow/MiButton" to="." method="_on_mi_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/TeamRow/ViButton" to="." method="_on_vi_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AddRow/AddButton" to="." method="_on_add_button_pressed"]
