@@ -55,6 +55,23 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Dodaj"
 
+[node name="CallsRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/AddRow" unique_id=1014480450]
+layout_mode = 2
+
+[node name="Zvanja Mi" type="Label" parent="MarginContainer/VBoxContainer/AddRow/CallsRow" unique_id=1872767329]
+layout_mode = 2
+
+[node name="CallsMiInput" type="LineEdit" parent="MarginContainer/VBoxContainer/AddRow/CallsRow" unique_id=1253884207]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Zvanja Vi" type="Label" parent="MarginContainer/VBoxContainer/AddRow/CallsRow" unique_id=2086112835]
+layout_mode = 2
+
+[node name="CallsViInput" type="LineEdit" parent="MarginContainer/VBoxContainer/AddRow/CallsRow" unique_id=1062270076]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=945288934]
 unique_name_in_owner = true
 layout_mode = 2
